@@ -1,0 +1,25 @@
+
+    GNU GRUB  version 0.95  (636K lower / 31680K upper memory)
+
+ [ Minimal BASH-like line editing is supported.  For the first word, TAB
+   lists possible command completions.  Anywhere else TAB lists the possible
+   completions of a device/filename. ]
+
+grub> ß
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
