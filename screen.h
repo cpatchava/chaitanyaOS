@@ -30,6 +30,7 @@ This is the bit pattern for displaying onto screen
 #define	L_BROWN		15
 #define	WHITE			16
 
-unsigned char * fb = I_O_ADDR;
+
+void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg);
 
 #endif

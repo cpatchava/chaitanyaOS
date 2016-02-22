@@ -24,11 +24,8 @@ dword1 equ	1
 
 loader:                         ; the loader label (defined as entry point in linker script)
 		mov esp, kernel_stack + KERNEL_STACK_SIZE
-		extern sum_of_three
+		extern kernel
 
-		push dword3
-		push dword2
-		push dword1
-		call sum_of_three
+		call kernel
 .loop:
     jmp .loop                   ; loop forever
