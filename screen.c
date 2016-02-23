@@ -10,7 +10,7 @@ void fb_write_cell(unsigned int i, char c, unsigned char fg, unsigned char bg){
 
 	fb[i]=c;
 	fb[i+1]= ((fg & 0x0F) << 4) | (bg & 0x0F);
-	fb_move_cursor(i/2);
+	fb_move_cursor(i/2+1);
 }
 
 void fb_move_cursor(unsigned short pos){
