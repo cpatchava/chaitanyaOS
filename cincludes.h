@@ -4,5 +4,8 @@
 #include "print.h"
 #include "screen.h"
 #include "io.h"
+#include "stdint.h"
+#include "gdt.h"
+#include "gdt_asm.h"
 
 #endif
