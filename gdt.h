@@ -3,8 +3,8 @@
 
 #include "cincludes.h"
 
-#define PL0	0x0//kernel level
-#define	PL3	0x3//user level
+#define PL0	0x0 //kernel level
+#define	PL3	0x3 //user level
 
 void gdt_init();
 

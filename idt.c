@@ -1,5 +1,8 @@
 #include "idt.h"
 #include "interrupt.h"
+#include "idt_asm.h"
+#include "cincludes.h"
+#include "stdint.h"
 
 #define IDT_INTERRUPT_GATE_TYPE 0
 #define IDT_TRAP_GATE_TYPE		1
@@ -8,8 +11,7 @@
 #define IDT_KEYBOARD_INTERRUPT_INDEX 0x21
 
 #define CREATE_IDT_GATE(idx) \
-    create_idt_gate(idx, (uint32_t) &interrupt_handler_##idx,\
-                    IDT_TRAP_GATE_TYPE, PL0);
+	create_idt_gate(idx, (uint32_t) &interrupt_handler_##idx,IDT_TRAP_GATE_TYPE, PL0);
 
 #define DECLARE_INTERRUPT_HANDLER(i) void interrupt_handler_##i(void)
 
@@ -80,13 +82,14 @@ void handle_syscall(void);
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type,
                             uint8_t pl);
 
+
 void idt_init(void)
 {
     idt_ptr_t idt_ptr;
     idt_ptr.limit = IDT_NUM_ENTRIES * sizeof(idt_gate_t) - 1;
     idt_ptr.base  = (uint32_t) &idt;
-
-    /* Protected mode exceptions */
+    
+		/* Protected mode exceptions */
     CREATE_IDT_GATE(0);
     CREATE_IDT_GATE(1);
     CREATE_IDT_GATE(2);
@@ -127,7 +130,35 @@ void idt_init(void)
     CREATE_IDT_GATE(47);
 
 
-    idt_load_and_set((uint32_t) &idt_ptr);
+    idt_load((uint32_t) &idt_ptr);
 }
 
+
+static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type,
+                            uint8_t pl)
+{
+    idt[n].handler_low = handler & 0x0000FFFF;
+    idt[n].handler_high = (handler >> 16) & 0x0000FFFF;
+
+    idt[n].segsel = 0x08;
+    idt[n].zero = 0;
+
+    /* name | value | size | desc
+     * --------------------------
+     * P    |     1 |    1 | segment present in memory
+     * DPL  |    pl |    2 | privilege level
+     * 0    |     0 |    1 | a zero bit
+     * D    |     1 |    1 | size of gate, 1 = 32 bits, 0 = 16 bits
+     * 1    |     1 |    1 | a one bit
+     * 1    |     1 |    1 | a one bit
+     * T    |  type |    1 | the type of the gate, 1 = trap, 0 = interrupt
+     */
+    idt[n].config =
+        (0x01 << 7)          |
+        ((pl & 0x03)  << 5)  |
+        (0x01 << 3)          |
+        (0x01 << 2)          |
+        (0x01 << 1)          |
+        type;
+}
 

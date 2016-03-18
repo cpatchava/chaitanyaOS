@@ -8,5 +8,5 @@ global	idt_load
 
 idt_load:
 	mov		eax, [esp+4]	; moving the variable into eax
-	lidt	eax						; loading the IDT which is the variable
+	lidt	[eax]						; loading the IDT which is the variable
 	ret									; the esp did not advance so you are returning to esp

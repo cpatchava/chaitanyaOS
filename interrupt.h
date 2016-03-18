@@ -19,7 +19,7 @@ struct cpu_state{
 	uint32_t ebx;
 	uint32_t eax;
 	uint32_t esp;
-} __attribite__((packed));
+}__attribute__((packed));
 typedef struct cpu_state cpu_state_t;
 
 struct stack_state{
@@ -30,4 +30,13 @@ struct stack_state{
 } __attribute__((packed));
 typedef struct stack_state stack_state_t;
 
+typedef void (*interrupt_handler_t) (cpu_state_t state,
+																			idt_info_t info,
+																			stack_state_t exec);
+uint32_t register_interrupt_handler(uint32_t interrupt,
+																		interrupt_handler_t handler);
+
+void enable_interrupts(void);
+void disable_interrupts(void);
+void switch_to_kernel_stack(void (*continuation)(uint32_t), uint32_t data);
 #endif
