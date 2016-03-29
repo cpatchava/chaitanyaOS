@@ -7,5 +7,7 @@
 #include "stdint.h"
 #include "gdt.h"
 #include "gdt_asm.h"
+#include "idt_asm.h"
+#include "interrupt.h"
 
 #endif

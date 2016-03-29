@@ -7,9 +7,13 @@ int sum_of_three(int arg1, int arg2, int arg3){
 */
 
 void kernel(){
+	disable_interrupts();
 	gdt_init();
-	print("hello world I am testing this");
+	idt_init();
+	enable_interrupts();
 
+	print("hello world I am testing this");
+	
 }
 
 
