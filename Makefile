@@ -1,4 +1,4 @@
-OBJECTS =  loader.o  gdt_asm.o io.o screen.o print.o gdt.o interrupt.o interrupt_asm.o idt_asm.o  kmain.o idt.o 
+OBJECTS =  loader.o  gdt_asm.o io.o screen.o print.o gdt.o interrupt.o interrupt_asm.o idt_asm.o  kmain.o idt.o pic.o keyboard.o 
 CC = gcc
 CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
 				 -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c

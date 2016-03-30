@@ -1,4 +1,5 @@
 #include "cincludes.h"
+
 /*
 int sum_of_three(int arg1, int arg2, int arg3){
 
@@ -10,9 +11,12 @@ void kernel(){
 	disable_interrupts();
 	gdt_init();
 	idt_init();
+	pic_init();
+	
+	kbd_init();
 	enable_interrupts();
 
-	print("hello world I am testing this");
+	print("BLAH BLAH");
 	
 }
 
