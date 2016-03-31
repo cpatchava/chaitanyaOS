@@ -74,7 +74,7 @@ typedef struct idt_ptr idt_ptr_t;
 idt_gate_t idt[IDT_NUM_ENTRIES];
 
 /* external assembly function for loading the ldt */
-void idt_load_and_set(uint32_t idt_ptr);
+void idt_load(uint32_t idt_ptr);
 
 /* external assembly function for handling syscalls */
 void handle_syscall(void);

@@ -16,8 +16,7 @@ void kernel(){
 	kbd_init();
 	enable_interrupts();
 
-	print("BLAH BLAH");
-	
+	print("BLAH BLAH 10101010");
 }
 
 

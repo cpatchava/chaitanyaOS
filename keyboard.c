@@ -1,6 +1,7 @@
 #include "keyboard.h"
 #include "io.h"
 #include "interrupt.h"
+#include "pic.h"
 
 #define KBD_DATA_PORT   0x60
 #define KBD_BUFFER_SIZE 1024
@@ -96,8 +97,9 @@ static void keyboard_handle_interrupt(cpu_state_t state,
     UNUSED_ARG(info);
     UNUSED_ARG(exec);
 
+		 print("hihi");
 		uint8_t  key_val;
-    //key_val = kbd_read_scan_code();//this is the value to print
+    key_val = kbd_read_scan_code();//this is the value to print
 	
     if (kbd_buffer.count < KBD_BUFFER_SIZE) {
 				key_val = kbd_read_scan_code();
@@ -108,7 +110,6 @@ static void keyboard_handle_interrupt(cpu_state_t state,
         }
     }
 		 char val = kbd_scan_code_to_ascii(key_val);
-		 print("hihi");
 		 print(&val);
 		 pic_acknowledge();
 }
