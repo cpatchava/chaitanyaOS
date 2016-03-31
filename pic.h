@@ -8,7 +8,7 @@
 #define PIC_NUM_IRQS    16
 
 #define PIT_INT_IDX     PIC1_START
-#define KBD_INT_IDX     PIC1_START + 1
+#define KBD_INT_IDX     PIC1_START + 1 
 
 #define COM1_INT_IDX    PIC1_START + 4
 #define COM2_INT_IDX    PIC1_START + 3

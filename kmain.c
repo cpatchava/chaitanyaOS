@@ -12,11 +12,12 @@ void kernel(){
 	gdt_init();
 	idt_init();
 	pic_init();
-	
+		
 	kbd_init();
+	pit_init();
 	enable_interrupts();
 
-	print("BLAH BLAH 10101010");
+//	print("BLAH BLAH 10101010");
 }
 
 

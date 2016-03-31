@@ -1,7 +1,6 @@
 #include "idt.h"
 #include "interrupt.h"
-#include "idt_asm.h"
-#include "cincludes.h"
+#include "gdt.h"
 #include "stdint.h"
 
 #define IDT_INTERRUPT_GATE_TYPE 0
@@ -11,7 +10,8 @@
 #define IDT_KEYBOARD_INTERRUPT_INDEX 0x21
 
 #define CREATE_IDT_GATE(idx) \
-	create_idt_gate(idx, (uint32_t) &interrupt_handler_##idx,IDT_TRAP_GATE_TYPE, PL0);
+	create_idt_gate(idx, (uint32_t) &interrupt_handler_##idx,\
+									IDT_TRAP_GATE_TYPE, PL0);
 
 #define DECLARE_INTERRUPT_HANDLER(i) void interrupt_handler_##i(void)
 
@@ -75,9 +75,6 @@ idt_gate_t idt[IDT_NUM_ENTRIES];
 
 /* external assembly function for loading the ldt */
 void idt_load(uint32_t idt_ptr);
-
-/* external assembly function for handling syscalls */
-void handle_syscall(void);
 
 static void create_idt_gate(uint8_t n, uint32_t handler, uint8_t type,
                             uint8_t pl);

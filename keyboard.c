@@ -116,7 +116,7 @@ static void keyboard_handle_interrupt(cpu_state_t state,
 
 uint32_t kbd_init(void)
 {
-    register_interrupt_handler(KBD_INT_IDX, keyboard_handle_interrupt);
+    register_interrupt_handler(KBD_INT_IDX, &keyboard_handle_interrupt);
 		
 		kbd_buffer.count = 0;
 		kbd_buffer.head = kbd_buffer.buffer;

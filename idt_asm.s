@@ -5,6 +5,8 @@ global	idt_load
 ; load_idt - Loads the interrupt descriptor table (IDT)
 ; stack: [esp + 4] address of first entry in IDT
 ;				 [esp		 ] return address
+section .text
+
 
 idt_load:
 	mov		eax, [esp+4]	; moving the variable into eax

@@ -9,6 +9,5 @@
 
 void gdt_init();
 
-void gdt_create_entry(uint32_t n, uint8_t pl, uint8_t type);
 
 #endif

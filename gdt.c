@@ -25,6 +25,9 @@ typedef struct gdt_entry gdt_entry_t;
 
 gdt_entry_t gdt_entries[GDT_NUM_ENTRIES];
 
+void gdt_load(uint32_t);
+static void gdt_create_entry(uint32_t n, uint8_t pl, uint8_t type);
+
 void gdt_init(){
 	gdt_ptr_t  gdt_pointer;
 	gdt_pointer.size = sizeof(gdt_entry_t)*GDT_NUM_ENTRIES;
